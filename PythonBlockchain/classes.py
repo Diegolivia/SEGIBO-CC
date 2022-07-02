@@ -1,7 +1,4 @@
 
-from ensurepip import version
-import hashlib
-
 from dataclasses import dataclass
 from sqlite3 import Timestamp
 

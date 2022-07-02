@@ -24,15 +24,13 @@ class Block():
         print("GenesisMade")
         return Block(0,0*64,0,10)
 
-
     def hash(self):
         return updatehash(
             self.number,
             self.prev_hash,
             self.data,
             self.nonce
-        )
-    
+        ) 
     def __str__(self):
         return str("Block#: %s\nHash: %s\nPrevious: %s\nNonce: %s\nData: %s\n" %(
             self.number,
@@ -42,7 +40,6 @@ class Block():
             self.data,
         )
     )
-
     def addTransact(self,tx):
         if self.numT >= LIMITTRANSACT:
             return False
@@ -51,7 +48,6 @@ class Block():
             self.numT+=1
             return True
         pass
-
 
 class Blockchain():
     difficulty = DIFFICULTY
@@ -63,7 +59,7 @@ class Blockchain():
         self.chain.append(block)
 
     def mine(self,txs):
-        #si es True, la transaccion se añade al bloque actual
+    #si es True, la transaccion se añade al bloque actual
         while True:
             if(self.chain[-1].addTransact(txs)):
                 print("Añadido a Bloque %s" %(self.chain[-1].number))
@@ -77,6 +73,7 @@ class Blockchain():
                     else:
                         self.chain[-1].nonce +=1
 
+    #Se valida que la blockchain se encuentre correctamente construida
     def isValid(self):
         for i in range(1,len(self.chain)):
             _previous = self.chain[i].prev_hash
@@ -85,28 +82,26 @@ class Blockchain():
                 return False
         return True
 
-def main():
-    blockchain = Blockchain()
-    transacts = [
-    TxSec("Lima1",1000001,"IT1",5,20,0),
-    TxSec("Lima2",1000002,"IT3",5,20,0),
-    TxSec("Lima3",1000003,"IT5",5,20,0),
-    TxSec("Lima1",1000004,"IT4",5,20,0),
-    TxSec("Lima2",1000004,"IT1",5,20,0),
-    TxSec("Lima3",1000003,"IT6",5,20,0),
-    TxSec("Lima1",1000002,"IT4",5,20,0),
-    TxSec("Lima2",1000001,"IT1",5,20,0),
-    TxSec("Lima3",1000005,"IT2",5,20,0)]
-    num = 0
-
-    for tx in transacts:
-        num+=1
-        blockchain.mine(tx)
-
-    for block in blockchain.chain:
-        print(block)
-
-    print(blockchain.isValid())
-
-if __name__ == '__main__':
-    main()
+##TestCode
+#def main():
+#    blockchain = Blockchain()
+#    transacts = [
+#    TxSec("Lima1",1000001,"IT1",5,20,0),
+#    TxSec("Lima2",1000002,"IT3",5,20,0),
+#    TxSec("Lima3",1000003,"IT5",5,20,0),
+#    TxSec("Lima1",1000004,"IT4",5,20,0),
+#    TxSec("Lima2",1000004,"IT1",5,20,0),
+#    TxSec("Lima3",1000003,"IT6",5,20,0),
+#    TxSec("Lima1",1000002,"IT4",5,20,0),
+#    TxSec("Lima2",1000001,"IT1",5,20,0),
+#    TxSec("Lima3",1000005,"IT2",5,20,0)]
+#    num = 0
+#
+#    for tx in transacts:
+#        num+=1
+#        blockchain.mine(tx)
+#
+#    for block in blockchain.chain:
+#        print(block)
+#
+#    print(blockchain.isValid())
