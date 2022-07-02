@@ -13,7 +13,7 @@ class TxSec:
     sucursal: str
     sku: float
     nombre: str
-    costoT: float
+    costo: float
     cantidad: int
     tipoTran: int
 

@@ -82,6 +82,15 @@ class Blockchain():
                 return False
         return True
 
+    def txCalls(self):
+        txs=[]
+        for block in self.chain:
+            for tx in block.data:
+                txs.append(tx)
+        return txs
+
+
+
 ##TestCode
 #def main():
 #    blockchain = Blockchain()
